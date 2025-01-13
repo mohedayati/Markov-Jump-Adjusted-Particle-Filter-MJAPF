@@ -47,11 +47,9 @@ for ti=tsim-2*dt
     x(:,i+1) = f_model(x(:,i),wf(:,i),u,dt); % wf is responsbile for injecting the faults | x is the combined state vector for I_dot and omega_dot
 end
 
-% X=x;
+
 X_noise_less=x(1,:); % only I
 X_noise_less_w=x(2,:); % only w
-% figure
-% plot(X_noise_less)
 
 %% Simulation of a model for calculating the KDE
 
@@ -99,17 +97,9 @@ for h=1:num_seq
     end
 
 
-    % Process noise parameters
-    mu_process1 = 0; sigma_process1 = 50*r*phi*1e-1*10; % Mean and SD for I_dot
-    mu_process2 = 0; sigma_process2 = 50*r*phi*1e-1*10; % Mean and SD for omega_dot
-
     A_process_1 = 0;
 
     B_process_1 = 2*0.1*0.05;
-
-
-
-
 
 
     name = 'Logistic'; % Type of distribution
@@ -125,7 +115,6 @@ for h=1:num_seq
 
     end
 
-    % X=x;
     X_noisy=x(1,:); % only I
     X_noisy_w=x(2,:); % only w
 
@@ -134,12 +123,8 @@ for h=1:num_seq
 
     residual_w = X_noisy_w - X_noise_less_w;
     residuals_all_w(h,:) = residual_w;
-    h
+    %h
 end
-
-% hold on
-% plot(X_noisy)
-
 
 data = reshape(residuals_all, 1, []);
 data_w = reshape(residuals_all_w, 1, []);
