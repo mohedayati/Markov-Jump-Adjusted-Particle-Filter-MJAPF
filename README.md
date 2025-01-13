@@ -4,9 +4,9 @@ This implementation of a novel Particle Filter is based on the work presented in
 
 Hedayati M., Rahimi A. (2025) A Hybrid Framework for Real-Time Satellite Fault Diagnosis Using Markov Jump-Adjusted Models and 1D Sliding Window Residual Networks, Acta Astronautica, from Elsevier BV, Volume 228, March 2025, Issue N/A, pp. 1066-1087, doi: 10.1016/j.actaastro.2024.12.057
 
-For a better understanding on how this state estimation algorithm works, please consult the paper.
+For a better understanding of how this state estimation algorithm works, please consult the paper.
 
-In this repository, a double-state estmiator implementation of the Markov Jump-Adjusted Particle Filter (MJAPF) algorithm is provided.
+In this repository, a double-state estimator implementation of the Markov Jump-Adjusted Particle Filter (MJAPF) algorithm is provided.
 
 The 'pf_m.m' script contains the function for calling the MJAPF algorithm. 'model_output.m' is the script responsible for propagating a dynamic system's model based on an individual particle trajectory up to that time-step. 'jumping_strategy.m' contains the code on deciding the jumps based on the transition probability matrix. The 'process_model_kde.m' script obtains the approximated Process noise PDF of a dynamic system based on Kernel Density Estimation (KDE) given that a large number of dynamic system simulations are possible. 
 
