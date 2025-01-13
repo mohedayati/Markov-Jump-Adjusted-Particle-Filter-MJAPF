@@ -133,9 +133,6 @@ weights_history_w_plt = zeros(T, numParticles);
 weights_history_w_plt(1, :) = weights_w;
 
 
-% Example system dynamics functions for each mode
-% systemDynamics = arrayfun(@(x) @(state) state + x * 0.1, 1:numModes, 'UniformOutput', false);
-
 % Main filtering loop
 for t = 2:1:T  % Assume T is the number of time steps
     measurement = getMeasurementAtTime(t, Z_real);  % Function to get measurement
@@ -146,14 +143,6 @@ for t = 2:1:T  % Assume T is the number of time steps
         currentState = particles(p);
         currentMode = mode(p);
 
-        % System dynamics
-        %[newState, newState_w] = model_output(t, mode(p), particles_history, particles_history_w, modeHistory, p);
-
-        % Update particle
-
-        %particles(p) = newState;      % these are commented because they
-        %only account for the process model and not the importance density
-        %particles_w(p) = newState_w;
 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % the importance density function for drawing the particles(p) from
@@ -185,8 +174,6 @@ for t = 2:1:T  % Assume T is the number of time steps
 
 
 
-
-
     % Measurement update (simplified for one state)
     
     weights = zeros(1, numParticles);
@@ -215,9 +202,8 @@ for t = 2:1:T  % Assume T is the number of time steps
         weights(p) = likelihood*prior/importance_density*weights_history(t-1, p);
 
         weights_w(p) = likelihood_w*prior_w/importance_density_w*weights_history_w(t-1, p);
-        %weights(p) = likelihood*weights_history(t-1, p);
+
     end
-    %prior/importance_density
 
     weights = weights / sum(weights);  % Normalize weights
     weights_w = weights_w / sum(weights_w);  % Normalize weights
@@ -251,33 +237,10 @@ for t = 2:1:T  % Assume T is the number of time steps
 
 
     % Continue to next time step...
-     %fprintf('Timestep markov: %d\n', t);
+     %fprintf('Timestep: %d\n', t);
 end
 
 
-
-% rmse = sqrt(mean((estimatedState_history - X_real).^2));
-% fprintf('RMSE of Estimation (RW Current): %f \n', rmse)
-% % rmse_list(hyper_q_counter) = rmse;
-% estimatedState_history_imputed = fillmissing(estimatedState_history, 'linear');  % Linearly interpolate missing values
-% rmse = sqrt(mean((estimatedState_history_imputed - X_real).^2));
-% % rmse_list_imputed(hyper_q_counter) = rmse;
-% fprintf('RMSE of Estimation (Imputed) (RW Current): %f \n', rmse)
-% rmse = sqrt(mean((Z_real - X_real).^2));
-% fprintf('RMSE of the measurement signal compared to the true state (RW Current): %f \n', rmse)
-% % rmse_list_real(hyper_q_counter) = rmse;
-% 
-% 
-% rmse = sqrt(mean((estimatedState_history_w - X_real_w).^2));
-% fprintf('RMSE of Estimation (RW Omega): %f \n', rmse)
-% % rmse_list_w(hyper_q_counter) = rmse;
-% estimatedState_history_imputed_w = fillmissing(estimatedState_history_w, 'linear');  % Linearly interpolate missing values
-% rmse = sqrt(mean((estimatedState_history_imputed_w - X_real_w).^2));
-% % rmse_list_imputed_w(hyper_q_counter) = rmse;
-% fprintf('RMSE of Estimation (Imputed) (RW Omega): %f \n', rmse)
-% rmse = sqrt(mean((Z_real_w - X_real_w).^2));
-% fprintf('RMSE of the measurement signal compared to the true state (RW Omega): %f \n', rmse)
-% % rmse_list_real_w(hyper_q_counter) = rmse;
 
 Z_filtered_markov = estimatedState_history;
 end
