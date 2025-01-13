@@ -4,13 +4,11 @@ function state_jumps = jumping_strategy
 dt=0.1;    tend = 100;    t=0:dt:tend;
 
 %% Loading the pre-made transition probability matrix
-load('C:\Users\hedayat2\Desktop\Simulation\Mohammad_Markovian\transition_probability_matrix.mat'); % Loads the transition probability matrix
-%load('C:\Users\hedayat2\Desktop\Simulation\Mohammad_Markovian\transition_probability_matrix_train_CNN.mat'); % Loads the transition probability matrix
+load('***.mat'); % Loads the transition probability matrix
+
 P = transition_prob;
 
 %% Simulating the state jumps
-
-%for i=1:1000
 
 % Initialize the model with the beginning state (Nominal)
 currentState = 1; % Assuming the system starts in state 1
@@ -26,8 +24,4 @@ for t = 2:N
     currentState = nextState;
 end
 
-
-% hold on
-% legend
-%end
 state_jumps = states;
