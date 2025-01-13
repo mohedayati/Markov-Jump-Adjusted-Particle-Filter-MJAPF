@@ -1,4 +1,4 @@
-function Z_filtered_markov = pf_m(Z_real, Z_real_w, numParticles, kde_f_I, kde_f_W)
+function Z_filtered = mjapf(Z_real, Z_real_w, numParticles, kde_f_I, kde_f_W)
 
 poolObj = gcp('nocreate'); % Gets current pool without creating a new one if it doesn't exist
 
